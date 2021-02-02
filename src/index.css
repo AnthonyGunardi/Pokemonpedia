@@ -4,6 +4,9 @@
 
 @layer components {
   .type {
-    @apply capitalize text-center rounded-md m-1 px-1 py-1 cursor-default shadow-lg
+    @apply capitalize text-center rounded-md m-1 px-3 py-2 cursor-default shadow-md text-black
+  }
+  .link {
+    @apply text-blue-500 cursor-pointer hover:text-blue-700 dark:text-green-500 dark:hover:text-green-700
   }
 }
