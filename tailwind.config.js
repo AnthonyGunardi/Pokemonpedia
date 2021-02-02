@@ -4,7 +4,7 @@ module.exports = {
   theme: {
     extend: {
       backgroundImage: theme => ({
-        'poke-header': "url('assets/img/header.jpeg')"
+        'poke-header': "url('assets/img/header.jpg')"
       }),
       backgroundColor: theme => ({
         ...theme('colors'),
