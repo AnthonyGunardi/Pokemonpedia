@@ -2,7 +2,7 @@ import { useState, useEffect } from 'react'
 
 const useFetch = (url) => {
   const [data, setData] = useState()
-  const [error, setError] = useState()
+  const [error, setError] = useState(false)
   const [loading, setLoading] = useState(true)
 
   useEffect(() => {
@@ -17,8 +17,12 @@ const useFetch = (url) => {
           }, 1000);
         })
         .catch(err => {
-          setError(err)
+          setError(true)
         })
+    }
+
+    return () => {
+      setData(null)
     }
   }, [url])
 

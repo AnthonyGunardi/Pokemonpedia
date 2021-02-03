@@ -1,9 +1,14 @@
 import React, {useState, useEffect} from 'react'
-import { TeamSidebar } from './index'
+import { TeamSidebar, Nothing } from './index'
 import { Link } from 'react-router-dom'
+import { useSelector, useDispatch } from 'react-redux'
+import { searchPoke } from '../store/action'
 
 function Sidebar () {
   const [dark, setDark] = useState(false)
+  const dispatch = useDispatch()
+  const teams = useSelector(state => state.teams)
+  const search = useSelector(state => state.search)
 
   const toggleDark = () => {
     if (dark) {
@@ -17,9 +22,8 @@ function Sidebar () {
     }
   }
 
-  const random = () => {
-    const number = Math.floor(Math.random() * 898)
-    return `https://pokeapi.co/api/v2/pokemon/${number}`
+  const searchFunc = (e) => {
+    dispatch(searchPoke(e.target.value))
   }
 
   useEffect(() => {
@@ -47,19 +51,25 @@ function Sidebar () {
           </div>
         </div>
         <div className="my-3 w-full">
-          <input type="text" name="search" id="search" placeholder="Search Pokémon Name" className="w-full border rounded-xl text-sm h-10 p-2" disabled/>
+          <input type="text" name="search" id="search" placeholder="Search Pokémon Name" className="w-full border rounded-xl text-sm h-10 p-2 text-black" value={search} onChange={searchFunc}/>
         </div>
         <div className="text-center w-full">
-          <h3 className="border-b mb-1">Your Team</h3>
+          <h3 className="border-b mb-1">Your Pokemon Team</h3>
           <div className="flex flex-wrap justify-center container p-1">
-            <TeamSidebar url={random()}/>
-            <TeamSidebar url={random()}/>
-            <TeamSidebar url={random()}/>
-            <TeamSidebar url={random()}/>
-            <TeamSidebar url={random()}/>
-            <TeamSidebar url={random()}/>
+            {
+              teams.length === 0
+              ?
+              <Nothing message="Create Your Own Pokemon Team!"/>
+              :
+              teams.map((e, idx) => {
+                return <TeamSidebar key={e.id} url={e.location_area_encounters.split("/encounters")[0]} index={idx} />
+              })
+            }
           </div>
-          <h3 className="border-t link">View Details</h3>
+          <Link to="/team" className="border-t link pt-1">View Teams Detail</Link>
+        </div>
+        <div className="border-t mt-2 pt-2">
+          <p className="break-words"><span className="font-semibold">Rules</span>: You can select up to 6 Pokemons into your team, by click the pokeball icon on each Pokemon. No duplicate Pokemon.</p>
         </div>
       </div>
     </div>
