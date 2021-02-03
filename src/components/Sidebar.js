@@ -1,5 +1,6 @@
 import React, {useState, useEffect} from 'react'
-import TeamSidebar from './TeamSidebar'
+import { TeamSidebar } from './index'
+import { Link } from 'react-router-dom'
 
 function Sidebar () {
   const [dark, setDark] = useState(false)
@@ -31,6 +32,7 @@ function Sidebar () {
   return (
     <div className="sm:w-2/12 w-full sm:order-last order-first sm:pt-2">
       <div className="sticky w-full top-0 flex flex-wrap p-2 justify-center">
+        <Link to="/" className="border-b link mb-2">HOME</Link>
         <div className="container mx-auto flex justify-center">
           <div className="p-2 border rounded-full flex max-w-xl cursor-pointer">
             <button className={`material-icons ${dark ? "mr-10" : "ml-10"} text-black dark:text-white`} onClick={toggleDark}>

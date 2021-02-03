@@ -1,29 +1,19 @@
 import React, { useState, useEffect } from 'react'
-import useFetch from '../hooks/useFetch'
-import Type from '../components/Type'
-import Data from '../components/Data'
-import Loading from '../components/Loading'
+import { useFetch } from '../hooks'
+import { Data, Loading, Type } from '../components'
+import { useParams } from 'react-router-dom'
 
 function PokeDetail () {
-  const [url, setUrl] = useState('')
-  const {data: pokemon, loading} = useFetch(url)
+  const { id } = useParams()
+  const {data: pokemon, loading} = useFetch(`https://pokeapi.co/api/v2/pokemon/${id}`)
   const [maxStat, setMaxStat] = useState(255)
 
-  const random = () => {
-    const number = Math.floor(Math.random() * 898)
-    return `https://pokeapi.co/api/v2/pokemon/${number}`
-  }
-
   useEffect(() => {
-    if (url === '') {
-      setUrl(random())
-    }
-
     if (pokemon) {
       const max = pokemon.stats.reduce((a, b) => ({base_stat: a.base_stat + b.base_stat}))
       setMaxStat(max.base_stat)
     }
-  }, [pokemon, url])
+  }, [pokemon])
 
   if (loading) {
     return (
