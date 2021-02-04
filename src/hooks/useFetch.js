@@ -12,9 +12,9 @@ const useFetch = (url) => {
         .then(res => res.json())
         .then(data => {
           setTimeout(() => {
-            data.results ? setData(data.results) : setData(data)
+            setData(data)
             setLoading(false)
-          }, 1000);
+          }, 100);
         })
         .catch(err => {
           setError(true)

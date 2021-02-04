@@ -1,32 +1,13 @@
-import { createStore } from 'redux'
+import { createStore, applyMiddleware, combineReducers } from 'redux'
+import thunk from 'redux-thunk'
+import pokemonReducer from './reducers/pokemonReducer'
+import teamReducer from './reducers/teamReducer'
 
-const initState = {
-  teams: [],
-  search: ''
-}
+const rootReducer = combineReducers({
+  pokemon: pokemonReducer,
+  team: teamReducer
+})
 
-function reducer (state = initState, action) {
-  switch (action.type) {
-    case "ADDPOKE":
-      return {
-        ...state,
-        teams: state.teams.concat(action.payload)
-      }
-    case "REMOVEPOKE":
-      return {
-        ...state,
-        teams: state.teams.filter((e,id) => id !== action.payload)
-      }
-    case "SEARCHPOKE":
-      return {
-        ...state,
-        search: action.payload
-      }
-    default:
-      return state
-  }
-}
-
-const store = createStore(reducer)
+const store = createStore(rootReducer, applyMiddleware(thunk))
 
 export default store

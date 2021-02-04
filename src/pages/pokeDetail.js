@@ -1,12 +1,22 @@
 import React, { useState, useEffect } from 'react'
-import { useFetch } from '../hooks'
 import { Data, Loading, Type, Error, Stat, Ability, Image, AddButton } from '../components'
 import { useParams } from 'react-router-dom'
+import { useSelector, useDispatch } from 'react-redux'
+import { fetchPoke } from '../actions/pokeAction'
 
 function PokeDetail () {
   const { id } = useParams()
-  const {data: pokemon, loading, error } = useFetch(`https://pokeapi.co/api/v2/pokemon/${id}`)
+  const pokemon = useSelector(state => state.pokemon.pokemon)
+  const error = useSelector(state => state.pokemon.error)
+  const loading = useSelector(state => state.pokemon.loading)
+  const dispatch = useDispatch()
   const [maxStat, setMaxStat] = useState(255)
+
+  useEffect(() => {
+    dispatch(fetchPoke(`https://pokeapi.co/api/v2/pokemon/${id}`))
+    return () => dispatch(fetchPoke('clear'))
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [])
 
   useEffect(() => {
     if (pokemon) {
@@ -18,7 +28,7 @@ function PokeDetail () {
   if (error) {
     return <Error />
   }
-  if (loading) {
+  if (loading || !pokemon) {
     return <Loading />
   }
   return (

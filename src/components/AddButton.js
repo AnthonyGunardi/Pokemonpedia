@@ -1,12 +1,12 @@
 import React from 'react'
 import pokeball from '../assets/img/pokeball.png'
 import { useDispatch, useSelector } from 'react-redux'
-import { addPoke } from '../store/action';
+import { addPoke } from '../actions/teamAction';
 import { toast } from 'react-toastify';
 
 function AddButton (props) {
   const dispatch = useDispatch()
-  const teams = useSelector(state => state.teams)
+  const teams = useSelector(state => state.team.teams)
 
   const addTeam = () => {
     if (teams.length < 6 && !teams.some(e => e.id === props.pokemon.id)) {

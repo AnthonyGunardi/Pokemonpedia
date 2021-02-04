@@ -3,7 +3,7 @@ import { useFetch } from '../hooks'
 import { Loading, Error } from './index'
 import { Link } from 'react-router-dom'
 import { useDispatch } from 'react-redux'
-import { removePoke } from '../store/action';
+import { removePoke } from '../actions/teamAction';
 
 function TeamSidebar (props) {
   const {data: pokemon, loading, error} = useFetch(props.url)

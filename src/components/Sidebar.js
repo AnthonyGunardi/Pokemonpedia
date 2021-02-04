@@ -2,13 +2,13 @@ import React, {useState, useEffect} from 'react'
 import { TeamSidebar, Nothing } from './index'
 import { Link } from 'react-router-dom'
 import { useSelector, useDispatch } from 'react-redux'
-import { searchPoke } from '../store/action'
+import { searchPoke } from '../actions/pokeAction'
 
 function Sidebar () {
   const [dark, setDark] = useState(false)
   const dispatch = useDispatch()
-  const teams = useSelector(state => state.teams)
-  const search = useSelector(state => state.search)
+  const teams = useSelector(state => state.team.teams)
+  const search = useSelector(state => state.pokemon.search)
 
   const toggleDark = () => {
     if (dark) {
@@ -54,7 +54,7 @@ function Sidebar () {
           <input type="text" name="search" id="search" placeholder="Search Pokémon Name" className="w-full border rounded-xl text-sm h-10 p-2 text-black" value={search} onChange={searchFunc}/>
         </div>
         <div className="text-center w-full">
-          <h3 className="border-b mb-1">Your Pokemon Team</h3>
+          <h3 className="border-b mb-1 text-xl font-semibold">Your Pokemon Team</h3>
           <div className="flex flex-wrap justify-center container p-1">
             {
               teams.length === 0
@@ -66,10 +66,13 @@ function Sidebar () {
               })
             }
           </div>
-          <Link to="/team" className="border-t link pt-1">View Teams Detail</Link>
+          <Link to="/team" className="border-t link pt-1">View Team Detail</Link>
         </div>
         <div className="border-t mt-2 pt-2">
-          <p className="break-words"><span className="font-semibold">Rules</span>: You can select up to 6 Pokemons into your team, by click the pokeball icon on each Pokemon. No duplicate Pokemon.</p>
+          <p className="break-words text-justify">
+            <span className="font-semibold">Rules</span>
+            : You can select up to 6 Pokemons into your team, by click the pokeball icon on each Pokemon. Duplicate pokemon is forbidden.
+          </p>
         </div>
       </div>
     </div>
