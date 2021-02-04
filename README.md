@@ -1,6 +1,11 @@
-# react-challenge
+# Pokemonpedia
+A Simple pokemon web, created using React.js, Redux, Tailwind CSS and PokeAPI
 
-# Getting Started with Create React App
+
+## URL
+https://pokemonpedia-antz.web.app/
+
+## Getting Started with Create React App
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
