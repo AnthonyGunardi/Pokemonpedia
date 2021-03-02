@@ -3,7 +3,7 @@ A Simple pokemon web, created using React.js, Redux, Tailwind CSS and PokeAPI
 
 
 ## URL
-https://pokemonpedia-antz.web.app/
+https://pokemonpedia-antz.web.app
 
 ## Getting Started with Create React App
 

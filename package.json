@@ -1,7 +1,17 @@
 {
-  "name": "react-challenge",
-  "version": "0.1.0",
+  "name": "pokemonpedia",
+  "version": "1.0.0",
   "private": true,
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/AnthonyGunardi/Pokemonpedia.git"
+  },
+  "keywords": [],
+  "author": "Anthony Gunardi",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/AnthonyGunardi/Pokemonpedia/issues"
+  },
   "dependencies": {
     "@craco/craco": "^6.0.0",
     "@tailwindcss/postcss7-compat": "^2.0.2",
